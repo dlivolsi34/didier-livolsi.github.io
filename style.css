@@ -1,0 +1,402 @@
+/* Styles Généraux */
+body {
+    font-family: 'Helvetica', Arial, sans-serif;
+    margin: 0;
+    background-color: #111; /* Fond sombre pour faire ressortir les photos */
+    color: #fff;
+}
+
+/* Navigation */
+header {
+    padding: 20px;
+    background: #000;
+	display: flex;
+    justify-content: center; /* Centre le contenu horizontalement */
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+	width: 100%;
+    max-width: 1400px; /* Aligné sur la largeur de votre .bio-container */
+    margin: 0 auto;    /* Centre le bloc nav lui-même */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+	margin: 0;
+    padding: 0;
+}
+
+nav ul li { margin-left: 30px; }
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+	transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ccc; /* Petit effet au survol */
+}
+
+/* Grille Responsive (s'adapte automatiquement) */
+.portfolio-grid {
+    column-count: 5;
+	/* On définit que chaque colonne fait au minimum 200px, 
+       mais ne peut pas dépasser environ 20% (100/5) de la largeur totale */
+    grid-template-columns: repeat(auto-fill, minmax(calc(20% - 15px), 1fr));
+    column-gap: 15px;
+    padding: 20px 10px;
+	/* ÉLÉMENTS CLÉS POUR LE CENTRAGE */
+    max-width: 1400px;  /* Limite la largeur pour ne pas que les 5 photos soient trop étirées */
+    margin: 0 auto;     /* Centre le bloc horizontalement sur la page */
+    width: 95%;         /* Permet d'avoir une marge de sécurité sur les petits écrans */
+	justify-content: center; /* Centre les éléments si la ligne n'est pas complète */
+	align-items: end; /* Aligne toutes les images sur la ligne du bas pour un effet galerie photo */
+}
+
+/* Optionnel : Ajustement pour les petits écrans (Tablettes / Mobiles) */
+@media (max-width: 1200px) {
+    .portfolio-grid {
+        /* On passe à 3 photos max sur tablettes */
+        grid-template-columns: repeat(auto-fill, minmax(calc(33.33% - 15px), 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .portfolio-grid {
+        /* On passe à 1 ou 2 photos sur mobile */
+        grid-template-columns: repeat(auto-fill, minmax(calc(50% - 15px), 1fr));
+    }
+}
+
+.photo-item {
+	break-inside : avoid; /* TRÈS IMPORTANT : Empêche la photo de se couper entre deux colonnes */
+	margin-bottom: 15px; /* Espace vertical entre les photos */
+	position: relative;
+    overflow: hidden; /* Pour que le zoom et le voile ne dépassent pas des bords */
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/*On crée le voile gris (invisible par défaut) */
+.photo-item::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(128, 128, 128, 0.6); /* Gris avec 60% d'opacité */
+    opacity: 0; /* Invisible au départ */
+    transition: opacity 0.3s ease;
+    pointer-events: none; /* Permet de cliquer sur l'image à travers le voile */
+    z-index: 2;
+}
+
+.photo-item img {	
+    width: 100%;
+	/* On définit le format paysage ici */
+	aspect-ratio: 3 / 2;
+	/* Le object-fit: cover est essentiel : il remplit le cadre sans déformer l'image */
+    object-fit: cover;
+	display: block;
+    cursor: pointer;
+    transition: transform 0.3s ease /* On prépare la transition pour le transform ET le filtre */
+	border-radius: 4px; /* Optionnel : pour adoucir les angles */
+	z-index: 1;
+	/* Empêche le menu contextuel sur certains navigateurs mobiles */
+    -webkit-touch-callout: none;
+    /* Empêche de glisser l'image */
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.photo-item img:hover { 
+	transform: scale(1.05); 
+}
+
+.photo-item:hover::after {
+	background-color: rgba(128, 128, 128, 0.6); /* Devient gris au survol */
+    opacity: 1; /* Le voile gris apparaît */
+}
+
+/* Classe spécifique pour les photos verticales */
+.photo-item.portrait img {
+    aspect-ratio: 2 / 3; /* Format portrait classique (inverse du 3/2) */
+	object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+	border-radius: 4px; /* Optionnel : pour adoucir les angles */
+}
+
+
+
+/* Effet Lightbox (Photo en grand) */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Transparence noire derrière */
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 80%;
+    box-shadow: 0 0 20px rgba(255,255,255,0.2);
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 40px;
+}
+
+.social-icons a {
+    color: white;
+    font-size: 30px;
+    margin: 0 15px;
+    transition: color 0.3s;
+}
+
+.social-icons a:hover { color: #ccc; }
+
+
+/* Styles pour la page Contact */
+.contact-container {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 20px;
+    text-align: center; /* Centre le titre et l'introduction */
+}
+
+.contact-content {
+    display: flex;
+    align-items: stretch; /* Fait en sorte que l'image et le formulaire aient la même hauteur */
+    gap: 60px;            /* Espace entre l'image et le formulaire */
+    margin-top: 40px;
+    text-align: left;     /* Aligne le texte du formulaire à gauche */
+    flex-wrap: wrap;      /* Empilement automatique sur mobile */
+}
+
+.contact-image {
+    flex: 1 1 400px;      /* Largeur flexible avec un minimum de 400px */
+}
+
+.contact-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;    /* Remplit tout l'espace proprement */
+    border-radius: 15px;  /* Bords arrondis comme sur la bio */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.contact-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+#contact-form {
+    flex: 1 1 450px;      /* Le formulaire prend un peu plus d'espace */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Ajustement pour mobile */
+@media (max-width: 768px) {
+    .contact-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .contact-image {
+        flex: 1 1 auto;
+        height: 300px; /* Hauteur fixe pour l'image sur mobile */
+    }
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #ccc;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #333;
+    background: #222;
+    color: white;
+    border-radius: 4px;
+    box-sizing: border-box; /* Important pour que le padding n'élargisse pas le champ */
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: #fff;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 15px;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #ccc;
+}
+
+/* Styles pour la page Bio */
+.bio-container {
+    max-width: 1400px;
+    margin: 80px auto;
+    padding: 20px;
+}
+
+.bio-content {
+    display: flex;
+    align-items: center; /* Aligne le haut de la photo et du texte */
+    gap: 180px;           /* Espace entre l'image et le texte */
+    flex-wrap: wrap;     /* Permet le passage à la ligne sur mobile */
+}
+
+.bio-image {
+    flex: 0 1 450px;    /* L'image prendra au moins 400px si possible */
+}
+
+.bio-image img {
+    width: 100%;
+    height: 100%;
+	object-fit: cover;
+    border-radius: 50%; /* Optionnel : léger arrondi */
+    filter: grayscale(20%); /* Optionnel : style artistique */
+	box-shadow: 0 10px 30px rgba(0,0,0,0.3); /* AJOUT : Une légère ombre portée pour donner du relief à la photo */
+}
+
+.bio-text {
+    flex: 1 1 400px;
+}
+
+.bio-text h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #fff;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.bio-text p {
+    line-height: 1.8;
+    color: #ccc;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+/* Ajustement spécifique pour les petits écrans */
+@media (max-width: 768px) {
+    .bio-content {
+        flex-direction: column; /* Force l'empilement vertical */
+        text-align: center;
+    }
+    
+    .bio-text h1 {
+        margin-top: 20px;
+    }
+}
+
+/* Animation de fondu */
+.fade-in {
+    opacity: 1;
+    transform: translateY(20px);
+    transition: opacity 1s ease-in-out, transform 1.2s ease-out;
+}
+
+/* Classe qui sera activée par le JavaScript */
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.bio-quote {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 60px auto; /* 60px d'espace sous la citation */
+    padding: 0 20px;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    color: #fff;
+}
+
+.bio-quote cite {
+    display: block;
+    margin-top: 10px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+#toast-message {
+    visibility: hidden;
+    min-width: 300px;
+    background-color: #333 !important;
+    color: #fff !important;
+    text-align: center;
+    border-radius: 4px;
+    padding: 16px;
+    position: fixed;
+    z-index: 2000 !important; /* Toujours au-dessus de tout */
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    font-family: sans-serif;
+    font-size: 14px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+#toast-message.show {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations d'apparition et de disparition */
+@keyframes fadein {
+    from { bottom: 0; opacity: 0; }
+    to { bottom: 30px; opacity: 1; }
+}
+
+@keyframes fadeout {
+    from { bottom: 30px; opacity: 1; }
+    to { bottom: 0; opacity: 0; }
+}

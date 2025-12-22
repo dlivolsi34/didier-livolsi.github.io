@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Photographe</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	<link rel="icon" type="image/png" href="icons/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg" />
+<link rel="shortcut icon" href="icons/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="DLivolsiWeb" />
+<link rel="manifest" href="icons/site.webmanifest" />
+</head>
+<body>
+	<div id="toast-message">© Didier LIVOLSI - Images protégées par le droit d'auteur</div>
+    <header>
+        <nav>
+            <div class="logo"><img src="images/logo2.webp" alt="Didier LIVOLSI Logo">
+			</div>
+            <ul>
+                <li><a href="index.html">Portfolio</a></li>
+                <li><a href="bio.html">Bio</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+			<div class="social-icons">
+				<a href="https://facebook.com/DidierLivolsiPicture" target="_blank"><i class="fab fa-facebook"></i></a>
+				<a href="https://instagram.com/didierlivolsi_picture" target="_blank"><i class="fab fa-instagram"></i></a>
+			</div>
+        </nav>
+    </header>
+
+    <main class="portfolio-grid">
+        <div class="photo-item"><img src="images/photo1.webp" alt="Description" onclick="openLightbox(this)"></div>
+        <div class="photo-item"><img src="images/photo2.webp" alt="Description" onclick="openLightbox(this)"></div>
+        <div class="photo-item"><img src="images/photo3.webp" alt="Description" onclick="openLightbox(this)"></div>
+        <div class="photo-item"><img src="images/photo4.webp" alt="Description" onclick="openLightbox(this)"></div>
+		<div class="photo-item"><img src="images/photo5.webp" alt="Description" onclick="openLightbox(this)"></div>
+        <div class="photo-item"><img src="images/photo6.webp" alt="Description" onclick="openLightbox(this)"></div>
+        <div class="photo-item"><img src="images/photo7.webp" alt="Description" onclick="openLightbox(this)"></div>
+        <div class="photo-item"><img src="images/photo8.webp" alt="Description" onclick="openLightbox(this)"></div>
+		<div class="photo-item"><img src="images/photo9.webp" alt="Description" onclick="openLightbox(this)"></div>
+        <div class="photo-item"><img src="images/photo10.webp" alt="Description" onclick="openLightbox(this)"></div>
+        <div class="photo-item"><img src="images/photo11.webp" alt="Description" onclick="openLightbox(this)"></div>
+		<div class="photo-item"><img src="images/photo12.webp" alt="Description" onclick="openLightbox(this)"></div>
+        <div class="photo-item"><img src="images/photo13.webp" alt="Description" onclick="openLightbox(this)"></div>
+        <div class="photo-item"><img src="images/photo14.webp" alt="Description" onclick="openLightbox(this)"></div>
+		<div class="photo-item"><img src="images/photo15.webp" alt="Description" onclick="openLightbox(this)"></div>
+        <div class="photo-item"><img src="images/photo16.webp" alt="Description" onclick="openLightbox(this)"></div>
+        <div class="photo-item"><img src="images/photo17.webp" alt="Description" onclick="openLightbox(this)"></div>
+		<div class="photo-item"><img src="images/photo18.webp" alt="Description" onclick="openLightbox(this)"></div>
+        <div class="photo-item"><img src="images/photo19.webp" alt="Description" onclick="openLightbox(this)"></div>
+		<div class="photo-item portrait"><img src="images/photo20.webp" alt="Description" onclick="openLightbox(this)"></div>
+        <div class="photo-item portrait"><img src="images/photo21.webp" alt="Description" onclick="openLightbox(this)"></div>
+		<div class="photo-item portrait"><img src="images/photo22.webp" alt="Description" onclick="openLightbox(this)"></div>
+        <div class="photo-item portrait"><img src="images/photo23.webp" alt="Description" onclick="openLightbox(this)"></div>
+        <div class="photo-item portrait"><img src="images/photo24.webp" alt="Description" onclick="openLightbox(this)"></div>
+		<div class="photo-item portrait"><img src="images/photo25.webp" alt="Description" onclick="openLightbox(this)"></div>
+        <div class="photo-item portrait"><img src="images/photo26.webp" alt="Description" onclick="openLightbox(this)"></div>
+    </main>
+
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <footer>
+        <div class="social-icons">
+            <a href="https://facebook.com/DidierLivolsiPicture" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://instagram.com/didierlivolsi_picture" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+	<script>
+  // Bloque le clic droit sur tout le site
+  document.addEventListener('contextmenu', event => event.preventDefault());
+
+  // Empêche le raccourci CTRL+S (Sauvegarder)
+  document.addEventListener('keydown', e => {
+    if (e.ctrlKey && (e.key === 's' || e.key === 'S')) {
+      e.preventDefault();
+    }
+  });
+</script>
+
+<script>
+  // On attend que le document soit chargé
+  document.addEventListener('DOMContentLoaded', function() {
+      
+      document.addEventListener('contextmenu', function(e) {
+          e.preventDefault(); // Bloque le menu
+          
+          var toast = document.getElementById("toast-message");
+          
+          // Debugging : affiche un message dans la console (F12) pour vérifier si ça tourne
+          console.log("Clic droit détecté, tentative d'affichage du toast");
+
+          if(toast) {
+              toast.classList.add("show");
+              
+              setTimeout(function(){ 
+                  toast.classList.remove("show");
+              }, 3000);
+          } else {
+              console.error("L'élément #toast-message n'a pas été trouvé dans le HTML !");
+          }
+      }, false);
+      
+  });
+</script>
+</body>
+</html>
