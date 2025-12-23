@@ -277,6 +277,23 @@ footer {
     background-color: #ccc;
 }
 
+/* Styles pour la page Merci */
+.thank-you-container {
+    text-align: center;
+    padding: 100px 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.btn-home {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #333; /* Adaptez à votre couleur */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
 /* Styles pour la page Bio */
 .bio-container {
     max-width: 1400px;
